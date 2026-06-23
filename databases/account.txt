@@ -1,0 +1,6 @@
+n2026_dici3
+inpass_dici3
+Connection type: Oracle
+Ip: 146.83.109.225
+Port: 1521
+Database name: INUTA
