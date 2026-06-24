@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "terrorist_gtd",
+  "project_id": "6287e334-13ae-4180-85e2-75a36a97203b"
+}

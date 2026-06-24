@@ -1,42 +1,6 @@
-# AGENTS.md
+# Project Instructions for AI Agents
 
-## Project overview
-
-University BI project (Universidad de Tarapacá) — data warehouse for the Global Terrorism Database (GTD). Organized in 4 phases (0–3) described in `fases.md`. Currently at Fase II (ETL implementation with Apache Hop → Oracle).
-
-## Tech stack
-
-- **Database:** Oracle ROLAP, either local Docker (`gvenzl/oracle-xe:21`) or remote (`146.83.109.225:1521`, SID `INUTA`). See `databases/` for connection details.
-- **ETL:** Apache Hop (pipelines + workflows)
-- **Analytics:** Pentaho, Apache Superset, or PowerBI Desktop
-- **Source data:** `databases/GTD 5156.xlsx`
-- **No build tools, no tests, no linters.** This is a documentation + SQL + Excel repository.
-
-## Key files
-
-| File | Purpose |
-|------|---------|
-| `fases.md` | Full project spec with phase requirements |
-| `databases/scheme_2024.sql` | SQL select listing all DW tables (star schema) |
-| `presentacion/presentacion.md` | Lecture slides: ROLAP design patterns, ETL with Hop, SCD types |
-| `databases/account.txt` | Remote Oracle credentials |
-| `databases/docker_oracle.txt` | Local Oracle Docker setup |
-| `databases/GTD 5156.xlsx` | Source dataset |
-
-## DW schema (star schema)
-
-Fact table: `fact_gtd_event`. Dimensions: `dim_ataque`, `dim_detalle`, `dim_tiempo`, `dim_lugar`, `dim_espec_lugar`, `dim_arma`, `dim_objetivos`, `dim_gperp`, `dim_bt_grupo`, `dim_mcr`, `dim_perpetradores`, `dim_impacto`, `dim_detalles_a`.
-
-## Conventions
-
-- All names in Spanish (dimensions, tables, attributes, documentation)
-- Dimension tables prefixed `dim_`, fact table prefixed `fact_`
-- Oracle ROLAP patterns from `presentacion/presentacion.md`: rely-disable-novalidate FK constraints, bitmap indexes on FK columns, surrogate keys with sequences, SCD type 2 with versioning
-
-## Branches
-
-- `main` — current work (Fase II)
-- `graphical-analysis` — separate analysis work
+This file provides instructions and context for AI coding agents working on this project.
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:7510c1e2 -->
 ## Beads Issue Tracker
@@ -85,3 +49,22 @@ bd close <id>         # Complete work
 - NEVER say "ready to push when you are" - YOU must push
 - If push fails, resolve and retry until it succeeds
 <!-- END BEADS INTEGRATION -->
+
+
+## Build & Test
+
+_Add your build and test commands here_
+
+```bash
+# Example:
+# npm install
+# npm test
+```
+
+## Architecture Overview
+
+_Add a brief overview of your project architecture_
+
+## Conventions & Patterns
+
+_Add your project-specific conventions here_
