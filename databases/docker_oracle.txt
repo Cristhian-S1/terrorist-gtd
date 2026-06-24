@@ -1,0 +1,11 @@
+Instalar Docker Desktop y ejecutar este contenedor 
+
+docker run -d --name mi-oracle-db -e ORACLE_PASSWORD=negocio -p 1521:1521 gvenzl/oracle-xe:21
+
+Y en hop apache
+
+Host: localhost
+Port: 1521 (el mapeado por docker)
+Service_Name: XEPDB1
+User: system
+Password: negocio(la escrita al configurar el contenedor)
