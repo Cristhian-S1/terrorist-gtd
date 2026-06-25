@@ -2,7 +2,7 @@
 
 ## Project overview
 
-University BI project (Universidad de Tarapacá) — data warehouse for the Global Terrorism Database (GTD). 4 phases per `fases.md`. **Phase 0 and Phase I are complete; Phase II (ETL implementation) is the current work.** Phase III (OLAP analytics) is next.
+University BI project (Universidad de Tarapacá) — data warehouse for the Global Terrorism Database (GTD). 4 phases per `fases.md`. **Phase 0 and Phase I are complete; Phase II (ETL implementation) is the current work.** Phase III (OLAP analytics) is next. `CLAUDE.md` is an unmaintained stub — this file is authoritative. For a step-by-step quick-start, see `️ Dónde estás en el proyecto.txt`.
 
 ## Tech stack
 
@@ -14,14 +14,14 @@ University BI project (Universidad de Tarapacá) — data warehouse for the Glob
 
 ## DW schema (star schema)
 
-Fact table: `fact_gtd_event`. 13 dimensions: `dim_ataque`, `dim_detalle`, `dim_tiempo`, `dim_lugar` (SCD Type 2 — only one), `dim_espec_lugar`, `dim_arma`, `dim_objetivos`, `dim_gperp`, `dim_bt_grupo` (bridge table), `dim_mcr`, `dim_perpetradores`, `dim_impacto`, `dim_detalles_a`. Full DDL: `databases/scheme_2024.sql`.
+Fact table: `fact_gtd_event`. 13 dimensions: `dim_ataque`, `dim_detalle`, `dim_tiempo`, `dim_lugar` (SCD Type 2 — only one), `dim_espec_lugar`, `dim_arma`, `dim_objetivos`, `dim_gperp`, `dim_bt_grupo` (bridge table), `dim_mcr`, `dim_perpetradores`, `dim_impacto`, `dim_detalles_a`. DDL: `databases/create_tables.sql` (28 tables + 2 sequences). `databases/scheme_2024.sql` is just a quick-reference SELECT script, not DDL.
 
 ## Operational gotchas (learned the hard way)
 
 - **No `sqlplus` in this CLI environment.** Run SQL via VSCode Oracle extension, SQL Developer, or directly from Hop. The 4 SQL files in `databases/` must be executed in this order:
-  1. `create_tables.sql` — DDL (creates 25 tables + 2 sequences; drops them first)
+  1. `create_tables.sql` — DDL (creates 28 tables + 2 sequences; drops them first)
   2. Hop pipelines load data from Excel → bigtable → staging → dimensions → fact
-  3. `dim_tiempo.sql` — PL/SQL procedure populates date dimension (run manually after DIM_TIEMPO pipeline)
+  3. `dim_tiempo.sql` — PL/SQL procedure populates date dimension (1994-2021; run after DIM_TIEMPO table exists but before fact table loads)
   4. `post_etl_constraints.sql` — RELY PKs, RELY DISABLE NOVALIDATE FKs, bitmap indexes on fact FKs
   5. `verification_queries.sql` — 8 analytical test queries
 
