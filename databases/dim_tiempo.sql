@@ -1,11 +1,9 @@
--- ============================================================
 -- GTD Data Warehouse - DIM_TIEMPO (Static Dimension)
--- Populate with dates 1970-01-01 to 2025-12-31
--- ============================================================
+-- Populate with dates 1994-01-01 to 2021-12-31
 
 CREATE OR REPLACE PROCEDURE GENERAR_RANGO_TIEMPO AS
-    FECHA_INICIO DATE := TO_DATE('01-01-1970', 'DD-MM-YYYY');
-    FECHA_FIN    DATE := TO_DATE('01-01-2026', 'DD-MM-YYYY');
+    FECHA_INICIO DATE := TO_DATE('01-01-1994', 'DD-MM-YYYY'); 
+    FECHA_FIN    DATE := TO_DATE('01-01-2021', 'DD-MM-YYYY');
     V_TIEMPO_SK  NUMBER;
     V_AGNO       NUMBER;
     V_MES        NUMBER;
@@ -28,3 +26,5 @@ BEGIN
     GENERAR_RANGO_TIEMPO;
 END;
 /
+
+select * from dim_tiempo order by iyear;

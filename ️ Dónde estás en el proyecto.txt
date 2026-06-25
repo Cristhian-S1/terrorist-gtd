@@ -1,0 +1,49 @@
+🗺️ Dónde estás en el proyecto
+Estás en Fase II (Implementación del DW + ETL). Las Fases 0 y I ya están terminadas. La Fase II tiene 4 grandes cosas que entregar:
+#	Qué	Para qué sirve
+1	Tablas creadas en Oracle	El "depósito" donde vas a guardar los datos del DW
+2	Pipelines en Hop	El "robot" que lee el Excel y lo carga en Oracle
+3	Workflow orquestador	El "encargado" que ejecuta todos los pipelines en orden
+4	Consultas SQL de prueba	Demostrar que el DW funciona
+✅ Lo que YA está listo (no tienes que rehacerlo)
+- databases/create_tables.sql — DDL con las 25 tablas, secuencias, etc. Solo falta ejecutarlo en Oracle.
+- databases/dim_tiempo.sql — Procedimiento PL/SQL para llenar la dimensión tiempo.
+- databases/post_etl_constraints.sql — Constraints RELY + índices bitmap (se ejecuta DESPUÉS del ETL).
+- databases/verification_queries.sql — 8 consultas analíticas de prueba.
+- Apache Hop 2.10 instalado en ~/Applications/hop/.
+- Driver JDBC ojdbc11.jar ya copiado.
+- 19 issues creados en beads para trackear progreso.
+🎯 Qué hacer AHORA (3 pasos exactos)
+Paso 1: Ejecutar el DDL en Oracle (10 min)
+Abre databases/create_tables.sql en VSCode con extensión de Oracle o en SQL Developer, conéctate con:
+- User: in2026_dici3
+- Pass: inpass_dici3
+- Host: 146.83.109.225:1521/INUTA
+Ejecuta todo el script. Debería crear 25 tablas + 4 secuencias sin errores.
+Paso 2: Crear conexión en Apache Hop (5 min)
+Abre Hop con:
+~/Applications/hop/hop-gui.sh
+Luego:
+1. Ctrl+Shift+M → click derecho en "Relational database connections" → New
+2. Llena: nombre inuta-gtd, tipo Oracle, host 146.83.109.225, puerto 1521, DB INUTA, user in2026_dici3, pass inpass_dici3
+3. Click Test → debe salir verde
+4. Guardar (disquete azul)
+Paso 3: Construir el primer pipeline "Carga Bigtable" (15 min)
+En Hop:
+1. Ctrl+N → selecciona Pipeline
+2. Doble click en el canvas → busca "Microsoft Excel Input"
+3. Configura: archivo databases/GTD 5156.xlsx, hoja Sheet0
+4. Click "Get fields from header row"
+5. Doble click otra vez → busca "Table output"
+6. Configura: conexión inuta-gtd, tabla destino GTD, marca Truncate
+7. Arrastra flecha desde Excel Input hasta Table Output
+8. Ctrl+S → nombre carga_bigtable
+9. Click ▶ (Play) para ejecutar → debe escribir ~5,165 filas
+Cuando esto funcione, avísame y te guío con el siguiente pipeline (DIM_TIEMPO y después los demás).
+📚 Para entender la teoría
+- presentacion/presentacion.md — Explica ROLAP, SCD Tipo 1/2, RELY constraints, Combination Lookup, Dimension Lookup/Update. Léelo cuando te toque implementar cada tipo de dimensión.
+- informe/proceso_etl.md — Es la guía exacta de cada pipeline. Tiene los SQL, los diagramas, los campos. Úsalo como referencia mientras construyes en Hop.
+- fases.md — Es la "letra chica" de lo que el profe espera que entregues.
+🆘 Si te trabas
+Dime exactamente qué error te sale (captura o texto) y en qué paso. No te preocupes por entender todo de una — el taller es un proceso, pipeline por pipeline.
+¿Quieres que arranquemos con el Paso 1 (ejecutar DDL en Oracle)? Si ya lo hiciste, dime y vamos al Paso 2.

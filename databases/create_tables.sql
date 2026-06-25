@@ -1,10 +1,7 @@
--- ============================================================
--- GTD Data Warehouse - DDL Script
--- Fase II - Inteligencia de Negocios
--- Universidad de Tarapaca
--- ============================================================
 
--- Cleanup (drop if exists - careful in production)
+-- GTD Data Warehouse - DDL Script
+
+-- Drop if exists
 BEGIN
    FOR t IN (SELECT table_name FROM user_tables
              WHERE table_name LIKE 'DIM_%'
@@ -121,7 +118,7 @@ CREATE TABLE GTD (
     WEAPTYPE4_TXT VARCHAR2(255),
     WEAPSUBTYPE4 NUMBER,
     WEAPSUBTYPE4_TXT VARCHAR2(255),
-    WEAPDETAIL VARCHAR2(512),
+    WEAPDETAIL CLOB,
     NKILL NUMBER,
     NKILLUS NUMBER,
     NKILLTER NUMBER,
@@ -138,27 +135,27 @@ CREATE TABLE GTD (
     NHOSTKIDUS NUMBER,
     NHOURS NUMBER,
     NDAYS NUMBER,
-    DIVERT NUMBER,
+    DIVERT VARCHAR2(255),
     KIDHIJCOUNTRY VARCHAR2(255),
     RANSOM NUMBER,
     RANSOMAMT NUMBER,
     RANSOMAMTUS NUMBER,
     RANSOMPAID NUMBER,
     RANSOMPAIDUS NUMBER,
-    RANSOMNOTE VARCHAR2(512),
+    RANSOMNOTE CLOB,
     HOSTKIDOUTCOME NUMBER,
     HOSTKIDOUTCOME_TXT VARCHAR2(255),
     NRELEASED NUMBER,
     ADDNOTES CLOB,
-    SCITE1 VARCHAR2(255),
-    SCITE2 VARCHAR2(255),
-    SCITE3 VARCHAR2(255),
+    SCITE1 CLOB,
+    SCITE2 CLOB,
+    SCITE3 CLOB,
     DBSOURCE VARCHAR2(50),
     INT_LOG NUMBER,
     INT_IDEO NUMBER,
     INT_MISC NUMBER,
     INT_ANY NUMBER,
-    RELATED VARCHAR2(512)
+    RELATED CLOB
 );
 
 -- 1. DIM_TIEMPO (dimension estatica)
@@ -426,7 +423,8 @@ CREATE TABLE DENORMALIZED_DATA_DIM (
     CHECKSUM NUMBER
 );
 
-CREATE SEQUENCE GRUPO_SEQ START WITH 0 INCREMENT BY 1 CACHE 100;
+-- Cambio de start with 0 to start with 1
+CREATE SEQUENCE GRUPO_SEQ START WITH 1 INCREMENT BY 1 CACHE 100;
 
 -- 13. FACT_GTD_EVENT (tabla de hechos)
 CREATE TABLE FACT_GTD_EVENT (
