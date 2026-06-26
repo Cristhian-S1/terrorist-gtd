@@ -7,7 +7,7 @@ University BI project (Universidad de Tarapacá) — data warehouse for the Glob
 ## Tech stack
 
 - **Database:** Oracle ROLAP — remote `146.83.109.225:1521` SID `INUTA` (creds in `databases/account.txt`) or local Docker `gvenzl/oracle-xe:21` (see `databases/docker_oracle.txt`).
-- **ETL:** Apache Hop 2.10 at `~/Applications/hop/`, launched via `hop-gui.sh`.
+- **ETL:** Apache Hop 2.18.1 at `~/Applications/hop/`, launched via `hop-gui.sh`. Original project docs reference 2.10, but the current working version is 2.18.1; some UI labels and dialog tabs differ.
 - **Analytics (Phase III):** Pentaho, Apache Superset, or PowerBI Desktop.
 - **Source data:** `databases/GTD 5156.xlsx` (~5,165 rows, South America subset).
 - **No build tools, no tests, no linters.** Verification is by SQL: `databases/verification_queries.sql`.
@@ -30,6 +30,8 @@ Fact table: `fact_gtd_event`. 13 dimensions: `dim_ataque`, `dim_detalle`, `dim_t
 - **Hop metadata connection name is `inuta-gtd`** (Oracle, user `in2026_dici3`). When creating new pipelines/workflows, reuse this connection from the metadata tree — don't recreate it per pipeline.
 
 - **Files in `informe/` and `presentacion/` are the source of truth for pipeline design.** The `proceso_etl.md` has exact SQL, hop config, and dimension field mappings. Treat it as the blueprint, not as optional reading.
+
+- **Hop 2.18.1 dialog layout:** In the **Dimension Lookup/Update** transform the tabs are `Physical`, `Keys`, `Fields`, `Technical key`, `Versioning`. Put natural-key lookups in the `Keys` tab (only `Dimension field` + `Field in stream`). Put SCD Type 2 changing attributes in the `Fields` tab with `Type of dimension update = Insert` (columns: `Dimension field`, `Stream field to compare with`, `Type of dimension update`). Older docs/2.10 screenshots merge these concepts into a single tab.
 
 - **Design and plan docs:** `docs/superpowers/specs/2025-06-24-gtd-etl-fase2-design.md` and `docs/superpowers/plans/2025-06-24-gtd-etl-fase2-plan.md` (19 tasks).
 
