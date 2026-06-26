@@ -1,0 +1,785 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow>
+  <info>
+    <name>GTD ETL Workflow</name>
+    <name_sync_with_filename>Y</name_sync_with_filename>
+    <description>Orquestacion completa ETL GTD</description>
+    <extended_description />
+    <workflow_version />
+    <created_user>-</created_user>
+    <created_date>2026/06/26 00:00:00.000</created_date>
+    <modified_user>-</modified_user>
+    <modified_date>2026/06/26 00:00:00.000</modified_date>
+    <parameters />
+    </info>
+  <actions>
+    <action>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <DayOfMonth>1</DayOfMonth>
+      <weekDay>1</weekDay>
+      <minutes>0</minutes>
+      <hour>12</hour>
+      <doNotWaitOnFirstExecution>N</doNotWaitOnFirstExecution>
+      <name>Start</name>
+      <description />
+      <type>SPECIAL</type>
+      <attributes />
+      <parallel>Y</parallel>
+      <xloc>80</xloc>
+      <yloc>80</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>carga_bigtables</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Applications/hop/carga_bigtables.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>Y</parallel>
+      <xloc>240</xloc>
+      <yloc>80</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>dim_lugar</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Applications/hop/dim_lugar.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>Y</parallel>
+      <xloc>80</xloc>
+      <yloc>240</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>dim_espec_lugar</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Applications/hop/dim_espec_lugar.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>Y</parallel>
+      <xloc>240</xloc>
+      <yloc>240</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>dim_ataque</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Applications/hop/dim_ataque.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>Y</parallel>
+      <xloc>400</xloc>
+      <yloc>240</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>dim_detalle</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Applications/hop/dim_detalle.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>Y</parallel>
+      <xloc>560</xloc>
+      <yloc>240</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>dim_detalles_a</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Applications/hop/dim_detalles_a.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>Y</parallel>
+      <xloc>720</xloc>
+      <yloc>240</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>dim_armas</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Applications/hop/dim_armas.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>Y</parallel>
+      <xloc>880</xloc>
+      <yloc>240</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>dim_objetivos</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Applications/hop/dim_objetivos.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>Y</parallel>
+      <xloc>1040</xloc>
+      <yloc>240</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>dim_impacto</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Applications/hop/dim_impacto.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>Y</parallel>
+      <xloc>1200</xloc>
+      <yloc>240</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>dim_mcr</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Applications/hop/dim_mcr.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>Y</parallel>
+      <xloc>1360</xloc>
+      <yloc>240</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>dim_perpretadores</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Applications/hop/dim_perpretadores.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>Y</parallel>
+      <xloc>1520</xloc>
+      <yloc>240</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>dim_gperp_staging</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Downloads/dim_gperp_staging.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>N</parallel>
+      <xloc>1680</xloc>
+      <yloc>240</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>dim_bt_grupo_staging</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Downloads/dim_bt_grupo_staging.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>N</parallel>
+      <xloc>1840</xloc>
+      <yloc>240</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>dim_gperp_denorm</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Downloads/dim_gperp_denorm.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>N</parallel>
+      <xloc>2000</xloc>
+      <yloc>240</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>dim_gperp_final</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Downloads/dim_gperp_final.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>N</parallel>
+      <xloc>2160</xloc>
+      <yloc>240</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>Dimensions loaded</name>
+      <description />
+      <type>DUMMY</type>
+      <attributes />
+      <parallel>N</parallel>
+      <xloc>1440</xloc>
+      <yloc>80</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>dim_tiempo_sql</name>
+      <description />
+      <type>SQL</type>
+      <attributes />
+      <connection>GTD_DB</connection>
+      <sql />
+      <sqlfromfile>Y</sqlfromfile>
+      <sqlfilename>/home/cristhian/Downloads/IN/terrorist-gtd/databases/dim_tiempo.sql</sqlfilename>
+      <sqlfilename_encoding />
+      <useVariableSubstitution>N</useVariableSubstitution>
+      <sendOneStatement>N</sendOneStatement>
+      <parallel>N</parallel>
+      <xloc>1760</xloc>
+      <yloc>80</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>fact_gtd_event_fix</name>
+      <description />
+      <type>PIPELINE</type>
+      <attributes />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>/home/cristhian/Downloads/fact_gtd_event_fix.hpl</filename>
+      <logext />
+      <logfile />
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <parallel>N</parallel>
+      <xloc>1920</xloc>
+      <yloc>80</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>post_etl_constraints_sql</name>
+      <description />
+      <type>SQL</type>
+      <attributes />
+      <connection>GTD_DB</connection>
+      <sql />
+      <sqlfromfile>Y</sqlfromfile>
+      <sqlfilename>/home/cristhian/Downloads/IN/terrorist-gtd/databases/post_etl_constraints.sql</sqlfilename>
+      <sqlfilename_encoding />
+      <useVariableSubstitution>N</useVariableSubstitution>
+      <sendOneStatement>N</sendOneStatement>
+      <parallel>N</parallel>
+      <xloc>2080</xloc>
+      <yloc>80</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <name>verification_queries_sql</name>
+      <description />
+      <type>SQL</type>
+      <attributes />
+      <connection>GTD_DB</connection>
+      <sql />
+      <sqlfromfile>Y</sqlfromfile>
+      <sqlfilename>/home/cristhian/Downloads/IN/terrorist-gtd/databases/verification_queries.sql</sqlfilename>
+      <sqlfilename_encoding />
+      <useVariableSubstitution>N</useVariableSubstitution>
+      <sendOneStatement>N</sendOneStatement>
+      <parallel>N</parallel>
+      <xloc>2240</xloc>
+      <yloc>80</yloc>
+      <attributes_hac />
+      </action>
+    <action>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <DayOfMonth>1</DayOfMonth>
+      <weekDay>1</weekDay>
+      <minutes>0</minutes>
+      <hour>12</hour>
+      <doNotWaitOnFirstExecution>N</doNotWaitOnFirstExecution>
+      <name>Success</name>
+      <description />
+      <type>SPECIAL</type>
+      <attributes />
+      <parallel>N</parallel>
+      <xloc>2400</xloc>
+      <yloc>80</yloc>
+      <attributes_hac />
+      </action>
+    </actions>
+  <hops>
+    <hop>
+      <from>Start</from>
+      <to>carga_bigtables</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+      </hop>
+    <hop>
+      <from>carga_bigtables</from>
+      <to>dim_lugar</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>dim_lugar</from>
+      <to>Dimensions loaded</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>carga_bigtables</from>
+      <to>dim_espec_lugar</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>dim_espec_lugar</from>
+      <to>Dimensions loaded</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>carga_bigtables</from>
+      <to>dim_ataque</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>dim_ataque</from>
+      <to>Dimensions loaded</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>carga_bigtables</from>
+      <to>dim_detalle</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>dim_detalle</from>
+      <to>Dimensions loaded</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>carga_bigtables</from>
+      <to>dim_detalles_a</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>dim_detalles_a</from>
+      <to>Dimensions loaded</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>carga_bigtables</from>
+      <to>dim_armas</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>dim_armas</from>
+      <to>Dimensions loaded</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>carga_bigtables</from>
+      <to>dim_objetivos</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>dim_objetivos</from>
+      <to>Dimensions loaded</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>carga_bigtables</from>
+      <to>dim_impacto</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>dim_impacto</from>
+      <to>Dimensions loaded</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>carga_bigtables</from>
+      <to>dim_mcr</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>dim_mcr</from>
+      <to>Dimensions loaded</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>carga_bigtables</from>
+      <to>dim_perpretadores</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>dim_perpretadores</from>
+      <to>Dimensions loaded</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>carga_bigtables</from>
+      <to>dim_gperp_staging</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>dim_gperp_staging</from>
+      <to>dim_bt_grupo_staging</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>dim_bt_grupo_staging</from>
+      <to>dim_gperp_denorm</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>dim_gperp_denorm</from>
+      <to>dim_gperp_final</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>dim_gperp_final</from>
+      <to>Dimensions loaded</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>Dimensions loaded</from>
+      <to>dim_tiempo_sql</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>dim_tiempo_sql</from>
+      <to>fact_gtd_event_fix</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>fact_gtd_event_fix</from>
+      <to>post_etl_constraints_sql</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>post_etl_constraints_sql</from>
+      <to>verification_queries_sql</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    <hop>
+      <from>verification_queries_sql</from>
+      <to>Success</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      </hop>
+    </hops>
+  <notepads />
+  <attributes />
+  </workflow>

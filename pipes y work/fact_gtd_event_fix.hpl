@@ -1,0 +1,983 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pipeline>
+  <info>
+    <capture_transform_performance>N</capture_transform_performance>
+    <transform_performance_capturing_delay>1000</transform_performance_capturing_delay>
+    <transform_performance_capturing_size_limit>100</transform_performance_capturing_size_limit>
+    <pipeline_type>Normal</pipeline_type>
+    <pipeline_status>-1</pipeline_status>
+    <parameters/>
+    <name>fact_gtd_event_fix</name>
+    <name_sync_with_filename>Y</name_sync_with_filename>
+    <created_user>-</created_user>
+    <modified_user>-</modified_user>
+    <created_date>2026/06/26 03:48:55.999</created_date>
+    <modified_date>2026/06/26 03:48:55.999</modified_date>
+  </info>
+  <transform>
+    <type>IfNull</type>
+    <name>If Null</name>
+    <fields>
+      <field>
+        <name>FECHA_INI_SK</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>FECHA_RES_SK</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>COUNTRY_TXT</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>REGION_TXT</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>PROVSTATE</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CITY</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>VICINITY</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>SPECIFICITY</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CRIT1</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CRIT2</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CRIT3</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>DOUBTTERR</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>ALTERNATIVE</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>INT_LOG</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>INT_MISC</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>INT_ANY</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>WEAPTYPE1</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>WEAPSUBTYPE1</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>WEAPTYPE2</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>WEAPSUBTYPE2</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>WEAPTYPE3</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>WEAPSUBTYPE3</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>WEAPTYPE4</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>WEAPSUBTYPE4</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>ATTACKTYPE1</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>SUCCESS</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>SUICIDE</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>TARGTYPE1</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>TARGTYPE2</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>TARGTYPE3</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>NATLTY1</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>NATLTY2</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>NATLTY3</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>PROPERTY</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>ISHOSTKID</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>MOTIVE</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>COMPCLAIM</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>GUNCERTAIN1</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>GUNCERTAIN2</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>GUNCERTAIN3</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CLAIMED</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CLAIM2</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CLAIM3</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CLAIMMODE</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CLAIMMODE2</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CLAIMMODE3</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CLAIMMODE_TXT</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CLAIMMODE2_TXT</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CLAIMMODE3_TXT</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>GNAME</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>GNAME2</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>GNAME3</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>GSUBNAME</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>GSUBNAME2</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>GSUBNAME3</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <valuetypes/>
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <replaceAllByValue/>
+    <replaceAllMask/>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>64</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>TableInput</type>
+    <name>Leer eventos GTD</name>
+    <sql>
+WITH gtd_data AS (
+  SELECT
+    EVENTID AS EVENT_ID, IYEAR, IMONTH, IDAY, EXTENDED, RESOLUTION,
+    TO_NUMBER(TO_CHAR(
+      CASE
+        WHEN IYEAR IS NULL THEN NULL
+        ELSE COALESCE(
+          TO_DATE(
+            IYEAR || '-' || LEAST(GREATEST(NVL(NULLIF(IMONTH, 0), 1), 1), 12) || '-' || NVL(NULLIF(IDAY, 0), 1)
+            DEFAULT NULL ON CONVERSION ERROR,
+            'YYYY-MM-DD'
+          ),
+          LAST_DAY(TO_DATE(IYEAR || '-' || LEAST(GREATEST(NVL(NULLIF(IMONTH, 0), 1), 1), 12) || '-01', 'YYYY-MM-DD'))
+        )
+      END,
+      'YYYYMMDD'
+    )) AS FECHA_INI_SK,
+    CASE
+      WHEN NVL(EXTENDED, 0) = 1 AND RESOLUTION IS NOT NULL
+      THEN TO_NUMBER(
+        TO_CHAR(
+          CASE
+            WHEN REGEXP_LIKE(RESOLUTION, '^\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}\.\d{3}$')
+            THEN TO_TIMESTAMP(RESOLUTION DEFAULT NULL ON CONVERSION ERROR, 'YYYY/MM/DD HH24:MI:SS.FF')
+            WHEN REGEXP_LIKE(RESOLUTION, '^\d{4}/\d{2}/\d{2}$')
+            THEN TO_DATE(RESOLUTION DEFAULT NULL ON CONVERSION ERROR, 'YYYY/MM/DD')
+            ELSE NULL
+          END,
+          'YYYYMMDD'
+        )
+      )
+      ELSE NULL
+    END AS FECHA_RES_SK,
+    COUNTRY, COUNTRY_TXT, REGION, REGION_TXT, PROVSTATE, CITY, LATITUDE, LONGITUDE,
+    VICINITY, SPECIFICITY,
+    CRIT1, CRIT2, CRIT3, DOUBTTERR, ALTERNATIVE, ALTERNATIVE_TXT, MULTIPLE,
+    INT_LOG, INT_MISC, INT_ANY,
+    WEAPTYPE1, WEAPTYPE1_TXT, WEAPSUBTYPE1, WEAPSUBTYPE1_TXT,
+    WEAPTYPE2, WEAPTYPE2_TXT, WEAPSUBTYPE2, WEAPSUBTYPE2_TXT,
+    WEAPTYPE3, WEAPTYPE3_TXT, WEAPSUBTYPE3, WEAPSUBTYPE3_TXT,
+    WEAPTYPE4, WEAPTYPE4_TXT, WEAPSUBTYPE4, WEAPSUBTYPE4_TXT,
+    ATTACKTYPE1, ATTACKTYPE1_TXT, ATTACKTYPE2, ATTACKTYPE2_TXT,
+    ATTACKTYPE3, ATTACKTYPE3_TXT, SUCCESS, SUICIDE,
+    TARGTYPE1, TARGTYPE1_TXT, TARGSUBTYPE1, TARGSUBTYPE1_TXT,
+    CORP1, TARGET1, NATLTY1, NATLTY1_TXT,
+    TARGTYPE2, TARGTYPE2_TXT, TARGSUBTYPE2, TARGSUBTYPE2_TXT,
+    CORP2, TARGET2, NATLTY2, NATLTY2_TXT,
+    TARGTYPE3, TARGTYPE3_TXT, TARGSUBTYPE3, TARGSUBTYPE3_TXT,
+    CORP3, TARGET3, NATLTY3, NATLTY3_TXT,
+    PROPERTY, PROPEXTENT, PROPEXTENT_TXT, ISHOSTKID, HOSTKIDOUTCOME, HOSTKIDOUTCOME_TXT,
+    GNAME, GSUBNAME, GNAME2, GSUBNAME2, GNAME3, GSUBNAME3,
+    MOTIVE, COMPCLAIM, GUNCERTAIN1, GUNCERTAIN2, GUNCERTAIN3,
+    CLAIMED, CLAIMMODE, CLAIMMODE_TXT,
+    CLAIM2, CLAIMMODE2, CLAIMMODE2_TXT,
+    CLAIM3, CLAIMMODE3, CLAIMMODE3_TXT,
+    INDIVIDUAL,
+    NKILL, NKILLUS, NKILLTER,
+    NWOUND, NWOUNDUS, NWOUNDTE,
+    NPERPS, NPERPCAP, NHOSTKID, NHOSTKIDUS,
+    NRELEASED, NHOURS, NDAYS,
+    RANSOMAMT, RANSOMAMTUS, RANSOMPAID, RANSOMPAIDUS, PROPVALUE
+  FROM GTD
+)
+SELECT
+  g.*,
+  NVL(t1.TIEMPO_SK, -1) AS FK_FECHA_INI,
+  NVL(t2.TIEMPO_SK, -1) AS FK_FECHA_RES,
+  NVL(l.LUGAR_SK, -1) AS FK_LUGAR,
+  NVL(sl.SPEC_LUGAR_SK, -1) AS FK_LUGAR_SPEC,
+  NVL(d.DETALLE_SK, -1) AS FK_DETALLES,
+  NVL(da.DETALLES_A_SK, -1) AS FK_DETALLES_ADICIONALES,
+  NVL(at.ATAQUE_SK, -1) AS FK_ATAQUE,
+  NVL(a1.ARMAS_SK, -1) AS FK_ARMA1,
+  NVL(a2.ARMAS_SK, -1) AS FK_ARMA2,
+  NVL(a3.ARMAS_SK, -1) AS FK_ARMA3,
+  NVL(a4.ARMAS_SK, -1) AS FK_ARMA4,
+  NVL(o1.OBJETIVO_SK, -1) AS FK_OBJ1,
+  NVL(o2.OBJETIVO_SK, -1) AS FK_OBJ2,
+  NVL(o3.OBJETIVO_SK, -1) AS FK_OBJ3,
+  NVL(i.IMPACTO_SK, -1) AS FK_IMPACTO,
+  NVL(p1.PERP_SK, -1) AS PERP_FK1,
+  NVL(p2.PERP_SK, -1) AS PERP_FK2,
+  NVL(p3.PERP_SK, -1) AS PERP_FK3,
+  NVL(m1.MCR_SK, -1) AS MCR_FK1,
+  NVL(m2.MCR_SK, -1) AS MCR_FK2,
+  NVL(m3.MCR_SK, -1) AS MCR_FK3,
+  NVL(g.CLAIMED, -1) AS CLAIMED1,
+  NVL(g.CLAIM2, -1) AS CLAIMED2,
+  NVL(g.CLAIM3, -1) AS CLAIMED3
+FROM gtd_data g
+LEFT JOIN DIM_TIEMPO t1 ON t1.TIEMPO_SK = g.FECHA_INI_SK
+LEFT JOIN DIM_TIEMPO t2 ON t2.TIEMPO_SK = g.FECHA_RES_SK
+LEFT JOIN (
+  SELECT MAX(LUGAR_SK) AS LUGAR_SK, COUNTRY_TXT, REGION_TXT, PROVSTATE, CITY
+  FROM DIM_LUGAR
+  WHERE VALID_TO IS NULL
+  GROUP BY COUNTRY_TXT, REGION_TXT, PROVSTATE, CITY
+) l
+  ON l.COUNTRY_TXT = NVL(g.COUNTRY_TXT, 'Unknown')
+ AND l.REGION_TXT = NVL(g.REGION_TXT, 'Unknown')
+ AND l.PROVSTATE = NVL(g.PROVSTATE, 'Unknown')
+ AND l.CITY = NVL(g.CITY, 'Unknown')
+LEFT JOIN (
+  SELECT MAX(SPEC_LUGAR_SK) AS SPEC_LUGAR_SK, VICINITY, SPECIFY
+  FROM DIM_ESPEC_LUGAR
+  GROUP BY VICINITY, SPECIFY
+) sl
+  ON sl.VICINITY = NVL(g.VICINITY, -1)
+ AND sl.SPECIFY = NVL(g.SPECIFICITY, -1)
+LEFT JOIN (
+  SELECT MAX(DETALLE_SK) AS DETALLE_SK, CRIT1, CRIT2, CRIT3, DOUBTTERR, ALTERNATIVE
+  FROM DIM_DETALLE
+  GROUP BY CRIT1, CRIT2, CRIT3, DOUBTTERR, ALTERNATIVE
+) d
+  ON d.CRIT1 = NVL(g.CRIT1, -1)
+ AND d.CRIT2 = NVL(g.CRIT2, -1)
+ AND d.CRIT3 = NVL(g.CRIT3, -1)
+ AND d.DOUBTTERR = NVL(g.DOUBTTERR, -1)
+ AND d.ALTERNATIVE = NVL(g.ALTERNATIVE, -1)
+LEFT JOIN (
+  SELECT MAX(DETALLES_A_SK) AS DETALLES_A_SK, INT_LOG, INT_MISC, INT_ANY
+  FROM DIM_DETALLES_A
+  GROUP BY INT_LOG, INT_MISC, INT_ANY
+) da
+  ON da.INT_LOG = NVL(g.INT_LOG, -1)
+ AND da.INT_MISC = NVL(g.INT_MISC, -1)
+ AND da.INT_ANY = NVL(g.INT_ANY, -1)
+LEFT JOIN (
+  SELECT MAX(ATAQUE_SK) AS ATAQUE_SK, ATTACKTYPE1, SUCCESS, SUICIDE
+  FROM DIM_ATAQUE
+  GROUP BY ATTACKTYPE1, SUCCESS, SUICIDE
+) at
+  ON at.ATTACKTYPE1 = NVL(g.ATTACKTYPE1, -1)
+ AND at.SUCCESS = NVL(g.SUCCESS, -1)
+ AND at.SUICIDE = NVL(g.SUICIDE, -1)
+LEFT JOIN (
+  SELECT MAX(ARMAS_SK) AS ARMAS_SK, WEAPTYPE, WEAPSUBTYPE
+  FROM DIM_ARMAS
+  GROUP BY WEAPTYPE, WEAPSUBTYPE
+) a1
+  ON a1.WEAPTYPE = NVL(g.WEAPTYPE1, -1)
+ AND a1.WEAPSUBTYPE = NVL(g.WEAPSUBTYPE1, -1)
+LEFT JOIN (
+  SELECT MAX(ARMAS_SK) AS ARMAS_SK, WEAPTYPE, WEAPSUBTYPE
+  FROM DIM_ARMAS
+  GROUP BY WEAPTYPE, WEAPSUBTYPE
+) a2
+  ON a2.WEAPTYPE = NVL(g.WEAPTYPE2, -1)
+ AND a2.WEAPSUBTYPE = NVL(g.WEAPSUBTYPE2, -1)
+LEFT JOIN (
+  SELECT MAX(ARMAS_SK) AS ARMAS_SK, WEAPTYPE, WEAPSUBTYPE
+  FROM DIM_ARMAS
+  GROUP BY WEAPTYPE, WEAPSUBTYPE
+) a3
+  ON a3.WEAPTYPE = NVL(g.WEAPTYPE3, -1)
+ AND a3.WEAPSUBTYPE = NVL(g.WEAPSUBTYPE3, -1)
+LEFT JOIN (
+  SELECT MAX(ARMAS_SK) AS ARMAS_SK, WEAPTYPE, WEAPSUBTYPE
+  FROM DIM_ARMAS
+  GROUP BY WEAPTYPE, WEAPSUBTYPE
+) a4
+  ON a4.WEAPTYPE = NVL(g.WEAPTYPE4, -1)
+ AND a4.WEAPSUBTYPE = NVL(g.WEAPSUBTYPE4, -1)
+LEFT JOIN (
+  SELECT MAX(OBJETIVO_SK) AS OBJETIVO_SK, TARGTYPE, TARGSUBTYPE, CORP, TARGET, NATLTY
+  FROM DIM_OBJETIVOS
+  GROUP BY TARGTYPE, TARGSUBTYPE, CORP, TARGET, NATLTY
+) o1
+  ON o1.TARGTYPE = NVL(g.TARGTYPE1, -1)
+ AND o1.TARGSUBTYPE = NVL(g.TARGSUBTYPE1, -1)
+ AND o1.CORP = NVL(g.CORP1, 'Unknown')
+ AND o1.TARGET = NVL(g.TARGET1, 'Unknown')
+ AND o1.NATLTY = NVL(g.NATLTY1, -1)
+LEFT JOIN (
+  SELECT MAX(OBJETIVO_SK) AS OBJETIVO_SK, TARGTYPE, TARGSUBTYPE, CORP, TARGET, NATLTY
+  FROM DIM_OBJETIVOS
+  GROUP BY TARGTYPE, TARGSUBTYPE, CORP, TARGET, NATLTY
+) o2
+  ON o2.TARGTYPE = NVL(g.TARGTYPE2, -1)
+ AND o2.TARGSUBTYPE = NVL(g.TARGSUBTYPE2, -1)
+ AND o2.CORP = NVL(g.CORP2, 'Unknown')
+ AND o2.TARGET = NVL(g.TARGET2, 'Unknown')
+ AND o2.NATLTY = NVL(g.NATLTY2, -1)
+LEFT JOIN (
+  SELECT MAX(OBJETIVO_SK) AS OBJETIVO_SK, TARGTYPE, TARGSUBTYPE, CORP, TARGET, NATLTY
+  FROM DIM_OBJETIVOS
+  GROUP BY TARGTYPE, TARGSUBTYPE, CORP, TARGET, NATLTY
+) o3
+  ON o3.TARGTYPE = NVL(g.TARGTYPE3, -1)
+ AND o3.TARGSUBTYPE = NVL(g.TARGSUBTYPE3, -1)
+ AND o3.CORP = NVL(g.CORP3, 'Unknown')
+ AND o3.TARGET = NVL(g.TARGET3, 'Unknown')
+ AND o3.NATLTY = NVL(g.NATLTY3, -1)
+LEFT JOIN (
+  SELECT MAX(IMPACTO_SK) AS IMPACTO_SK, PROPERTY, PROPEXTENT, ISHOSTKID, HOSTKIDOUTCOME
+  FROM DIM_IMPACTO
+  GROUP BY PROPERTY, PROPEXTENT, ISHOSTKID, HOSTKIDOUTCOME
+) i
+  ON i.PROPERTY = NVL(g.PROPERTY, -1)
+ AND i.PROPEXTENT = NVL(g.PROPEXTENT, -1)
+ AND i.ISHOSTKID = NVL(g.ISHOSTKID, -1)
+ AND i.HOSTKIDOUTCOME = NVL(g.HOSTKIDOUTCOME, -1)
+LEFT JOIN (
+  SELECT MAX(PERP_SK) AS PERP_SK, GNAME, GSUBNAME
+  FROM DIM_PERPETRADORES
+  GROUP BY GNAME, GSUBNAME
+) p1
+  ON p1.GNAME = NVL(g.GNAME, 'Unknown')
+ AND p1.GSUBNAME = NVL(g.GSUBNAME, 'Unknown')
+LEFT JOIN (
+  SELECT MAX(PERP_SK) AS PERP_SK, GNAME, GSUBNAME
+  FROM DIM_PERPETRADORES
+  GROUP BY GNAME, GSUBNAME
+) p2
+  ON p2.GNAME = NVL(g.GNAME2, 'Unknown')
+ AND p2.GSUBNAME = NVL(g.GSUBNAME2, 'Unknown')
+LEFT JOIN (
+  SELECT MAX(PERP_SK) AS PERP_SK, GNAME, GSUBNAME
+  FROM DIM_PERPETRADORES
+  GROUP BY GNAME, GSUBNAME
+) p3
+  ON p3.GNAME = NVL(g.GNAME3, 'Unknown')
+ AND p3.GSUBNAME = NVL(g.GSUBNAME3, 'Unknown')
+LEFT JOIN (
+  SELECT MAX(MCR_SK) AS MCR_SK, CLAIMMODE, CLAIMMODE_TXT
+  FROM DIM_MCR
+  GROUP BY CLAIMMODE, CLAIMMODE_TXT
+) m1
+  ON m1.CLAIMMODE = NVL(g.CLAIMMODE, -1)
+ AND m1.CLAIMMODE_TXT = NVL(g.CLAIMMODE_TXT, 'Unknown')
+LEFT JOIN (
+  SELECT MAX(MCR_SK) AS MCR_SK, CLAIMMODE, CLAIMMODE_TXT
+  FROM DIM_MCR
+  GROUP BY CLAIMMODE, CLAIMMODE_TXT
+) m2
+  ON m2.CLAIMMODE = NVL(g.CLAIMMODE2, -1)
+ AND m2.CLAIMMODE_TXT = NVL(g.CLAIMMODE2_TXT, 'Unknown')
+LEFT JOIN (
+  SELECT MAX(MCR_SK) AS MCR_SK, CLAIMMODE, CLAIMMODE_TXT
+  FROM DIM_MCR
+  GROUP BY CLAIMMODE, CLAIMMODE_TXT
+) m3
+  ON m3.CLAIMMODE = NVL(g.CLAIMMODE3, -1)
+ AND m3.CLAIMMODE_TXT = NVL(g.CLAIMMODE3_TXT, 'Unknown')
+</sql>
+    <limit>0</limit>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <connection>GTD_DB</connection>
+    <lookup/>
+    <sql_from_file/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>240</xloc>
+      <yloc>64</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>TableOutput</type>
+    <name>FACT_GTD_EVENT</name>
+    <connection>GTD_DB</connection>
+    <schema>IN2026_DICI3</schema>
+    <table>FACT_GTD_EVENT</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <only_when_have_rows>N</only_when_have_rows>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>N</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>N</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <specify_fields>Y</specify_fields>
+    <auto_update_table_structure>N</auto_update_table_structure>
+    <always_drop_and_recreate>N</always_drop_and_recreate>
+    <add_columns>N</add_columns>
+    <drop_columns>N</drop_columns>
+    <change_column_types>N</change_column_types>
+    <fields>
+      <field>
+        <stream_name>EVENT_ID</stream_name>
+        <column_name>EVENT_ID</column_name>
+      </field>
+      <field>
+        <stream_name>LATITUDE</stream_name>
+        <column_name>LATITUDE</column_name>
+      </field>
+      <field>
+        <stream_name>LONGITUDE</stream_name>
+        <column_name>LONGITUDE</column_name>
+      </field>
+      <field>
+        <stream_name>EXTENDED</stream_name>
+        <column_name>EXTEND</column_name>
+      </field>
+      <field>
+        <stream_name>NPERPS</stream_name>
+        <column_name>NPERPS</column_name>
+      </field>
+      <field>
+        <stream_name>NPERPCAP</stream_name>
+        <column_name>NPERPCAP</column_name>
+      </field>
+      <field>
+        <stream_name>INDIVIDUAL</stream_name>
+        <column_name>INDIVIDUAL</column_name>
+      </field>
+      <field>
+        <stream_name>NKILL</stream_name>
+        <column_name>NKILL</column_name>
+      </field>
+      <field>
+        <stream_name>NKILLUS</stream_name>
+        <column_name>NKILLUS</column_name>
+      </field>
+      <field>
+        <stream_name>NKILLTER</stream_name>
+        <column_name>NKILLTER</column_name>
+      </field>
+      <field>
+        <stream_name>NWOUND</stream_name>
+        <column_name>NWOUND</column_name>
+      </field>
+      <field>
+        <stream_name>NWOUNDUS</stream_name>
+        <column_name>NWOUNDUS</column_name>
+      </field>
+      <field>
+        <stream_name>NWOUNDTE</stream_name>
+        <column_name>NWOUNDTE</column_name>
+      </field>
+      <field>
+        <stream_name>PROPVALUE</stream_name>
+        <column_name>PROPVALUE</column_name>
+      </field>
+      <field>
+        <stream_name>NHOSTKID</stream_name>
+        <column_name>NHOSTKID</column_name>
+      </field>
+      <field>
+        <stream_name>NHOSTKIDUS</stream_name>
+        <column_name>NHOSTKIDUS</column_name>
+      </field>
+      <field>
+        <stream_name>NHOURS</stream_name>
+        <column_name>NHOURS</column_name>
+      </field>
+      <field>
+        <stream_name>NDAYS</stream_name>
+        <column_name>NDAYS</column_name>
+      </field>
+      <field>
+        <stream_name>RANSOMAMT</stream_name>
+        <column_name>RANSOMAMT</column_name>
+      </field>
+      <field>
+        <stream_name>RANSOMAMTUS</stream_name>
+        <column_name>RANSOMAMTUS</column_name>
+      </field>
+      <field>
+        <stream_name>RANSOMPAID</stream_name>
+        <column_name>RANSOMPAID</column_name>
+      </field>
+      <field>
+        <stream_name>RANSOMPAIDUS</stream_name>
+        <column_name>RANSOMPAIDUS</column_name>
+      </field>
+      <field>
+        <stream_name>NRELEASED</stream_name>
+        <column_name>NRELEASED</column_name>
+      </field>
+      <field>
+        <stream_name>FK_DETALLES</stream_name>
+        <column_name>FK_DETALLES</column_name>
+      </field>
+      <field>
+        <stream_name>FK_FECHA_INI</stream_name>
+        <column_name>FK_FECHA_INI</column_name>
+      </field>
+      <field>
+        <stream_name>FK_FECHA_RES</stream_name>
+        <column_name>FK_FECHA_RES</column_name>
+      </field>
+      <field>
+        <stream_name>FK_LUGAR</stream_name>
+        <column_name>FK_LUGAR</column_name>
+      </field>
+      <field>
+        <stream_name>FK_LUGAR_SPEC</stream_name>
+        <column_name>FK_LUGAR_SPEC</column_name>
+      </field>
+      <field>
+        <stream_name>FK_ATAQUE</stream_name>
+        <column_name>FK_ATAQUE</column_name>
+      </field>
+      <field>
+        <stream_name>FK_ARMA1</stream_name>
+        <column_name>FK_ARMA1</column_name>
+      </field>
+      <field>
+        <stream_name>FK_ARMA2</stream_name>
+        <column_name>FK_ARMA2</column_name>
+      </field>
+      <field>
+        <stream_name>FK_ARMA3</stream_name>
+        <column_name>FK_ARMA3</column_name>
+      </field>
+      <field>
+        <stream_name>FK_OBJ1</stream_name>
+        <column_name>FK_OBJ1</column_name>
+      </field>
+      <field>
+        <stream_name>FK_PERPG</stream_name>
+        <column_name>FK_PERPG</column_name>
+      </field>
+      <field>
+        <stream_name>FK_IMPACTO</stream_name>
+        <column_name>FK_IMPACTO</column_name>
+      </field>
+      <field>
+        <stream_name>FK_DETALLES_ADICIONALES</stream_name>
+        <column_name>FK_DETALLES_ADICIONALES</column_name>
+      </field>
+      <field>
+        <stream_name>FK_ARMA4</stream_name>
+        <column_name>FK_ARMA4</column_name>
+      </field>
+      <field>
+        <stream_name>FK_OBJ2</stream_name>
+        <column_name>FK_OBJ2</column_name>
+      </field>
+      <field>
+        <stream_name>FK_OBJ3</stream_name>
+        <column_name>FK_OBJ3</column_name>
+      </field>
+    </fields>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>208</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>TableInput</type>
+    <name>TI_DENORMALIZED</name>
+    <sql>SELECT 
+  G.GRUPO_SK,
+  DBMS_LOB.SUBSTR(D.MOTIVE, 4000, 1) AS MOTIVE,
+  D.COMPCLAIM,
+  D.PERP_FK1,
+  D.MCR_FK1,
+  D.CLAIMED1,
+  D.GUNCERTAIN1,
+  D.PERP_FK2,
+  D.MCR_FK2,
+  D.CLAIMED2,
+  D.GUNCERTAIN2,
+  D.PERP_FK3,
+  D.MCR_FK3,
+  D.CLAIMED3,
+  D.GUNCERTAIN3
+FROM DENORMALIZED_DATA_DIM D
+JOIN DIM_GPERP G
+  ON DBMS_LOB.SUBSTR(G.MOTIVE, 4000, 1) = DBMS_LOB.SUBSTR(D.MOTIVE, 4000, 1)
+  AND G.COMPCLAIM = D.COMPCLAIM</sql>
+    <limit>0</limit>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <connection>GTD_DB</connection>
+    <lookup/>
+    <sql_from_file/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>64</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>StreamLookup</type>
+    <name>Stream lookup</name>
+    <from>TI_DENORMALIZED</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>MOTIVE</name>
+        <field>MOTIVE</field>
+      </key>
+      <key>
+        <name>COMPCLAIM</name>
+        <field>COMPCLAIM</field>
+      </key>
+      <key>
+        <name>PERP_FK1</name>
+        <field>PERP_FK1</field>
+      </key>
+      <key>
+        <name>MCR_FK1</name>
+        <field>MCR_FK1</field>
+      </key>
+      <key>
+        <name>CLAIMED1</name>
+        <field>CLAIMED1</field>
+      </key>
+      <key>
+        <name>GUNCERTAIN1</name>
+        <field>GUNCERTAIN1</field>
+      </key>
+      <key>
+        <name>PERP_FK2</name>
+        <field>PERP_FK2</field>
+      </key>
+      <key>
+        <name>MCR_FK2</name>
+        <field>MCR_FK2</field>
+      </key>
+      <key>
+        <name>CLAIMED2</name>
+        <field>CLAIMED2</field>
+      </key>
+      <key>
+        <name>GUNCERTAIN2</name>
+        <field>GUNCERTAIN2</field>
+      </key>
+      <key>
+        <name>PERP_FK3</name>
+        <field>PERP_FK3</field>
+      </key>
+      <key>
+        <name>MCR_FK3</name>
+        <field>MCR_FK3</field>
+      </key>
+      <key>
+        <name>CLAIMED3</name>
+        <field>CLAIMED3</field>
+      </key>
+      <key>
+        <name>GUNCERTAIN3</name>
+        <field>GUNCERTAIN3</field>
+      </key>
+      <value>
+        <name>GRUPO_SK</name>
+        <rename>FK_PERPG</rename>
+        <default>-1</default>
+        <type>BigNumber</type>
+      </value>
+    </lookup>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>64</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <order>
+    <hop>
+      <from>Leer eventos GTD</from>
+      <to>If Null</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>If Null</from>
+      <to>Stream lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>TI_DENORMALIZED</from>
+      <to>Stream lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Stream lookup</from>
+      <to>FACT_GTD_EVENT</to>
+      <enabled>Y</enabled>
+    </hop>
+  </order>
+  <notepads/>
+  <attributes/>
+  <transform_error_handling/>
+</pipeline>

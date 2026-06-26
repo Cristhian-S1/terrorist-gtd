@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pipeline>
+  <info>
+    <capture_transform_performance>N</capture_transform_performance>
+    <transform_performance_capturing_delay>1000</transform_performance_capturing_delay>
+    <transform_performance_capturing_size_limit>100</transform_performance_capturing_size_limit>
+    <pipeline_type>Normal</pipeline_type>
+    <pipeline_status>-1</pipeline_status>
+    <parameters/>
+    <name>New pipeline</name>
+    <name_sync_with_filename>Y</name_sync_with_filename>
+    <created_user>-</created_user>
+    <modified_user>-</modified_user>
+    <created_date>2026/06/26 01:31:19.849</created_date>
+    <modified_date>2026/06/26 01:31:19.849</modified_date>
+  </info>
+  <transform>
+    <type>DBLookup</type>
+    <name>Lookup GRUPO</name>
+    <connection>GTD_DB</connection>
+    <cache>Y</cache>
+    <cache_size>0</cache_size>
+    <cache_load_all>Y</cache_load_all>
+    <lookup>
+      <schema>IN2026_DICI3</schema>
+      <table>V_DIM_GPERP_STG</table>
+      <key>
+        <name>COMPCLAIM</name>
+        <name2/>
+        <condition>=</condition>
+        <field>COMPCLAIM</field>
+      </key>
+      <key>
+        <name>MOTIVE</name>
+        <name2/>
+        <condition>=</condition>
+        <field>MOTIVE</field>
+      </key>
+      <value>
+        <name>GRUPO</name>
+        <rename>GRUPO</rename>
+        <default>-1</default>
+        <type/>
+        <trim_type>none</trim_type>
+      </value>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+    </lookup>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>176</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>TableInput</type>
+    <name>Leer perpretadores</name>
+    <sql>SELECT
+    EVENTID,
+    COMPCLAIM,
+    MOTIVE,
+    GNAME,
+    GSUBNAME,
+    GUNCERTAIN1 AS GUNCERTAIN,
+    CLAIMED AS CLAIMED,
+    CLAIMMODE,
+    CLAIMMODE_TXT
+FROM GTD
+WHERE GNAME IS NOT NULL
+
+UNION ALL
+
+SELECT
+    EVENTID,
+    COMPCLAIM,
+    MOTIVE,
+    GNAME2,
+    GSUBNAME2,
+    GUNCERTAIN2 AS GUNCERTAIN,
+    CLAIM2 AS CLAIMED,
+    CLAIMMODE2 AS CLAIMMODE,
+    CLAIMMODE2_TXT AS CLAIMMODE_TXT
+FROM GTD
+WHERE GNAME2 IS NOT NULL
+
+UNION ALL
+
+SELECT
+    EVENTID,
+    COMPCLAIM,
+    MOTIVE,
+    GNAME3,
+    GSUBNAME3,
+    GUNCERTAIN3 AS GUNCERTAIN,
+    CLAIM3 AS CLAIMED,
+    CLAIMMODE3 AS CLAIMMODE,
+    CLAIMMODE3_TXT AS CLAIMMODE_TXT
+FROM GTD
+WHERE GNAME3 IS NOT NULL</sql>
+    <limit>0</limit>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <connection>GTD_DB</connection>
+    <lookup/>
+    <sql_from_file/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>176</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>DBLookup</type>
+    <name>Lookup PERP_FK</name>
+    <connection>GTD_DB</connection>
+    <cache>Y</cache>
+    <cache_size>0</cache_size>
+    <cache_load_all>Y</cache_load_all>
+    <lookup>
+      <schema>IN2026_DICI3</schema>
+      <table>DIM_PERPETRADORES</table>
+      <key>
+        <name>GNAME</name>
+        <name2/>
+        <condition>=</condition>
+        <field>GNAME</field>
+      </key>
+      <key>
+        <name>GSUBNAME</name>
+        <name2/>
+        <condition>=</condition>
+        <field>GSUBNAME</field>
+      </key>
+      <value>
+        <name>PERP_SK</name>
+        <rename>PERP_FK</rename>
+        <default>-1</default>
+        <type/>
+        <trim_type>none</trim_type>
+      </value>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+    </lookup>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>336</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>DBLookup</type>
+    <name>Lookup MCR_FK</name>
+    <connection>GTD_DB</connection>
+    <cache>Y</cache>
+    <cache_size>0</cache_size>
+    <cache_load_all>Y</cache_load_all>
+    <lookup>
+      <schema>IN2026_DICI3</schema>
+      <table>DIM_MCR</table>
+      <key>
+        <name>CLAIMMODE</name>
+        <name2/>
+        <condition>=</condition>
+        <field>CLAIMMODE</field>
+      </key>
+      <key>
+        <name>CLAIMMODE_TXT</name>
+        <name2/>
+        <condition>=</condition>
+        <field>CLAIMMODE_TXT</field>
+      </key>
+      <value>
+        <name>MCR_SK</name>
+        <rename>MCR_FK</rename>
+        <default>-1</default>
+        <type/>
+        <trim_type>none</trim_type>
+      </value>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+    </lookup>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>176</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>TableOutput</type>
+    <name>Dimension BT_GRUPO_STG</name>
+    <connection>GTD_DB</connection>
+    <schema>IN2026_DICI3</schema>
+    <table>DIM_BT_GRUPO_STG</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <only_when_have_rows>N</only_when_have_rows>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <specify_fields>Y</specify_fields>
+    <auto_update_table_structure>N</auto_update_table_structure>
+    <always_drop_and_recreate>N</always_drop_and_recreate>
+    <add_columns>N</add_columns>
+    <drop_columns>N</drop_columns>
+    <change_column_types>N</change_column_types>
+    <fields>
+      <field>
+        <stream_name>GRUPO_NUM</stream_name>
+        <column_name>GRUPO</column_name>
+      </field>
+      <field>
+        <stream_name>PERP_FK</stream_name>
+        <column_name>PERP_FK</column_name>
+      </field>
+      <field>
+        <stream_name>MCR_FK</stream_name>
+        <column_name>MCR_FK</column_name>
+      </field>
+      <field>
+        <stream_name>GUNCERTAIN</stream_name>
+        <column_name>GUNCERTAIN</column_name>
+      </field>
+      <field>
+        <stream_name>CLAIMED</stream_name>
+        <column_name>CLAIMED</column_name>
+      </field>
+    </fields>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>80</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>IfNull</type>
+    <name>If Null </name>
+    <fields>
+      <field>
+        <name>COMPCLAIM</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>MOTIVE</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>GNAME</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>GSUBNAME</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>GUNCERTAIN</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CLAIMED</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CLAIMMODE</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>CLAIMMODE_TXT</name>
+        <value>Unknown</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <valuetypes/>
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <replaceAllByValue/>
+    <replaceAllMask/>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>176</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>Janino</type>
+    <name>Cast GRUPO</name>
+    <formula>
+      <field_name>GRUPO_NUM</field_name>
+      <formula_string>GRUPO == null ? -1L : Long.parseLong(GRUPO.toString())</formula_string>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field/>
+    </formula>
+    <java_target_version>6</java_target_version>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>336</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <order>
+    <hop>
+      <from>Lookup PERP_FK</from>
+      <to>Lookup MCR_FK</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Lookup MCR_FK</from>
+      <to>Dimension BT_GRUPO_STG</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Leer perpretadores</from>
+      <to>If Null </to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>If Null </from>
+      <to>Lookup GRUPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Lookup GRUPO</from>
+      <to>Cast GRUPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Cast GRUPO</from>
+      <to>Lookup PERP_FK</to>
+      <enabled>Y</enabled>
+    </hop>
+  </order>
+  <notepads/>
+  <attributes/>
+  <transform_error_handling/>
+</pipeline>

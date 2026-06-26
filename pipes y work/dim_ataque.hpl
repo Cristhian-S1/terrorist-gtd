@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pipeline>
+  <info>
+    <capture_transform_performance>N</capture_transform_performance>
+    <transform_performance_capturing_delay>1000</transform_performance_capturing_delay>
+    <transform_performance_capturing_size_limit>100</transform_performance_capturing_size_limit>
+    <pipeline_type>Normal</pipeline_type>
+    <pipeline_status>-1</pipeline_status>
+    <parameters />
+    <name>New pipeline</name>
+    <name_sync_with_filename>Y</name_sync_with_filename>
+    <created_user>-</created_user>
+    <modified_user>-</modified_user>
+    <created_date>2026/06/25 23:24:55.046</created_date>
+    <modified_date>2026/06/25 23:24:55.046</modified_date>
+    </info>
+  <transform>
+    <type>TableInput</type>
+    <name>lectura de atributos de ataques</name>
+    <sql>
+SELECT
+    ATTACKTYPE1,
+    MAX(ATTACKTYPE1_TXT) AS ATTACKTYPE1_TXT,
+    MAX(ATTACKTYPE2) AS ATTACKTYPE2,
+    MAX(ATTACKTYPE2_TXT) AS ATTACKTYPE2_TXT,
+    MAX(ATTACKTYPE3) AS ATTACKTYPE3,
+    MAX(ATTACKTYPE3_TXT) AS ATTACKTYPE3_TXT,
+    SUCCESS,
+    SUICIDE
+FROM (
+    SELECT
+        COALESCE(ATTACKTYPE1, -9) AS ATTACKTYPE1,
+        COALESCE(ATTACKTYPE1_TXT, 'Desconocido') AS ATTACKTYPE1_TXT,
+        COALESCE(ATTACKTYPE2, -1) AS ATTACKTYPE2,
+        COALESCE(ATTACKTYPE2_TXT, 'Not applicable') AS ATTACKTYPE2_TXT,
+        COALESCE(ATTACKTYPE3, -1) AS ATTACKTYPE3,
+        COALESCE(ATTACKTYPE3_TXT, 'Not applicable') AS ATTACKTYPE3_TXT,
+        COALESCE(SUCCESS, -9) AS SUCCESS,
+        COALESCE(SUICIDE, -9) AS SUICIDE
+    FROM GTD
+)
+GROUP BY ATTACKTYPE1, SUCCESS, SUICIDE
+</sql>
+    <limit>0</limit>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <connection>GTD_DB</connection>
+    <lookup />
+    <sql_from_file />
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>96</yloc>
+      </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+      </partitioning>
+    <attributes />
+    </transform>
+  <transform>
+    <type>IfNull</type>
+    <name>If Null</name>
+    <fields>
+      <field>
+        <name>ATTACKTYPE1</name>
+        <value>-9</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>ATTACKTYPE1_TXT</name>
+        <value>Desconocido</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>ATTACKTYPE2</name>
+        <value>-1</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>ATTACKTYPE2_TXT</name>
+        <value>Not applicable</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>ATTACKTYPE3</name>
+        <value>-1</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>ATTACKTYPE3_TXT</name>
+        <value>Not applicable</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>SUCCESS</name>
+        <value>-9</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>SUICIDE</name>
+        <value>-9</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+        </field>
+      </fields>
+    <valuetypes />
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <replaceAllByValue />
+    <replaceAllMask />
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>96</yloc>
+      </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+      </partitioning>
+    <attributes />
+    </transform>
+  <transform>
+    <type>CombinationLookup</type>
+    <name>Dimension de ataque</name>
+    <schema>IN2026_DICI3</schema>
+    <table>dim_ataque</table>
+    <connection>GTD_DB</connection>
+    <replace>N</replace>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <commit>100</commit>
+    <preloadCache>N</preloadCache>
+    <cache_size>9999</cache_size>
+    <fields>
+      <key>
+        <name>ATTACKTYPE1</name>
+        <lookup>ATTACKTYPE1</lookup>
+        </key>
+      <key>
+        <name>SUCCESS</name>
+        <lookup>SUCCESS</lookup>
+        </key>
+      <key>
+        <name>SUICIDE</name>
+        <lookup>SUICIDE</lookup>
+        </key>
+      <return>
+        <name>ATAQUE_SK</name>
+        <use_autoinc>N</use_autoinc>
+        <last_update_field />
+        <creation_method>tablemax</creation_method>
+        </return>
+      </fields>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>96</yloc>
+      </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+      </partitioning>
+    <attributes />
+    </transform>
+  <order>
+    <hop>
+      <from>lectura de atributos de ataques</from>
+      <to>If Null</to>
+      <enabled>Y</enabled>
+      </hop>
+    <hop>
+      <from>If Null</from>
+      <to>Dimension de ataque</to>
+      <enabled>Y</enabled>
+      </hop>
+    </order>
+  <notepads />
+  <attributes />
+  <transform_error_handling />
+  </pipeline>

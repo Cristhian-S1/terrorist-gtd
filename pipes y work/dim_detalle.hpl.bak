@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pipeline>
+  <info>
+    <capture_transform_performance>N</capture_transform_performance>
+    <transform_performance_capturing_delay>1000</transform_performance_capturing_delay>
+    <transform_performance_capturing_size_limit>100</transform_performance_capturing_size_limit>
+    <pipeline_type>Normal</pipeline_type>
+    <pipeline_status>-1</pipeline_status>
+    <parameters/>
+    <name>New pipeline</name>
+    <name_sync_with_filename>Y</name_sync_with_filename>
+    <created_user>-</created_user>
+    <modified_user>-</modified_user>
+    <created_date>2026/06/25 20:55:29.836</created_date>
+    <modified_date>2026/06/25 20:55:29.836</modified_date>
+  </info>
+  <transform>
+    <type>TableInput</type>
+    <name>Lectura atributos de detalle</name>
+    <sql>SELECT DISTINCT
+    CRIT1,
+    CRIT2,
+    CRIT3,
+    DOUBTTERR,
+    ALTERNATIVE,
+    ALTERNATIVE_TXT,
+    MULTIPLE,
+    'POLITICAL, ECONOMIC, RELIGIOUS, OR SOCIAL GOAL' AS CRIT1_TXT,
+    'INTENTION TO COERCE, INTIMIDATE OR PUBLICIZE TO LARGER AUDIENCE(S)' AS CRIT2_TXT,
+    'OUTSIDE INTERNATIONAL HUMANITARIAN LAW' AS CRIT3_TXT,
+    CASE DOUBTTERR WHEN 0 THEN 'NO' WHEN 1 THEN 'YES' ELSE 'Desconocido' END AS DOUBTTERR_TXT,
+    CASE MULTIPLE WHEN 0 THEN 'NO' WHEN 1 THEN 'YES' ELSE 'DESCONOCIDO' END AS MULTIPLE_TXT
+FROM GTD</sql>
+    <limit>0</limit>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <connection>GTD_DB</connection>
+    <lookup/>
+    <sql_from_file/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>304</xloc>
+      <yloc>64</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>CombinationLookup</type>
+    <name>Dimension detalle</name>
+    <schema>IN2026_DICI3</schema>
+    <table>dim_detalle</table>
+    <connection>GTD_DB</connection>
+    <replace>N</replace>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <commit>100</commit>
+    <preloadCache>N</preloadCache>
+    <cache_size>9999</cache_size>
+    <fields>
+      <key>
+        <name>CRIT1</name>
+        <lookup>CRIT1</lookup>
+      </key>
+      <key>
+        <name>CRIT2</name>
+        <lookup>CRIT2</lookup>
+      </key>
+      <key>
+        <name>CRIT3</name>
+        <lookup>CRIT3</lookup>
+      </key>
+      <key>
+        <name>DOUBTTERR</name>
+        <lookup>DOUBTTERR</lookup>
+      </key>
+      <key>
+        <name>ALTERNATIVE</name>
+        <lookup>ALTERNATIVE</lookup>
+      </key>
+      <key>
+        <name>ALTERNATIVE_TXT</name>
+        <lookup>ALTERNATIVE_TXT</lookup>
+      </key>
+      <key>
+        <name>MULTIPLE</name>
+        <lookup>MULTIPLE</lookup>
+      </key>
+      <key>
+        <name>CRIT1_TXT</name>
+        <lookup>CRIT1_TXT</lookup>
+      </key>
+      <key>
+        <name>CRIT2_TXT</name>
+        <lookup>CRIT2_TXT</lookup>
+      </key>
+      <key>
+        <name>CRIT3_TXT</name>
+        <lookup>CRIT3_TXT</lookup>
+      </key>
+      <key>
+        <name>DOUBTTERR_TXT</name>
+        <lookup>DOUBTTERR_TXT</lookup>
+      </key>
+      <key>
+        <name>MULTIPLE_TXT</name>
+        <lookup>MULTIPLE_TXT</lookup>
+      </key>
+      <return>
+        <name>DETALLE_SK</name>
+        <use_autoinc>N</use_autoinc>
+        <last_update_field/>
+        <creation_method>tablemax</creation_method>
+      </return>
+    </fields>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>64</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <order>
+    <hop>
+      <from>Lectura atributos de detalle</from>
+      <to>Dimension detalle</to>
+      <enabled>Y</enabled>
+    </hop>
+  </order>
+  <notepads/>
+  <attributes/>
+  <transform_error_handling/>
+</pipeline>

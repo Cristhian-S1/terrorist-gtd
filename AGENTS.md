@@ -16,6 +16,14 @@ University BI project (Universidad de Tarapacá) — data warehouse for the Glob
 
 Fact table: `fact_gtd_event`. 13 dimensions: `dim_ataque`, `dim_detalle`, `dim_tiempo`, `dim_lugar` (SCD Type 2 — only one), `dim_espec_lugar`, `dim_arma`, `dim_objetivos`, `dim_gperp`, `dim_bt_grupo` (bridge table), `dim_mcr`, `dim_perpetradores`, `dim_impacto`, `dim_detalles_a`. DDL: `databases/create_tables.sql` (28 tables + 2 sequences). `databases/scheme_2024.sql` is just a quick-reference SELECT script, not DDL.
 
+### `FACT_GTD_EVENT` structure
+
+Current fact table columns:
+- Measures: `EVENT_ID`, `LATITUDE`, `LONGITUDE`, `EXTEND`, `NPERPS`, `NPERPCAP`, `INDIVIDUAL`, `NKILL`, `NKILLUS`, `NKILLTER`, `NWOUND`, `NWOUNDUS`, `NWOUNDTE`, `PROPVALUE`, `NHOSTKID`, `NHOSTKIDUS`, `NHOURS`, `NDAYS`, `RANSOMAMT`, `RANSOMAMTUS`, `RANSOMPAID`, `RANSOMPAIDUS`, `NRELEASED`.
+- Dimension FKs: `FK_DETALLES`, `FK_FECHA_INI`, `FK_FECHA_RES`, `FK_LUGAR`, `FK_LUGAR_SPEC`, `FK_ATAQUE`, `FK_ARMA1-4`, `FK_OBJ1-3`, `FK_PERPG`, `FK_IMPACTO`, `FK_DETALLES_ADICIONALES`.
+- `FK_FECHA_RES` derives from GTD `RESOLUTION` and is nullable (only applies to extended incidents).
+- `FK_PERP` was removed; there is no standalone perpetrator dimension directly referenced by the fact table.
+
 ## Operational gotchas (learned the hard way)
 
 - **No `sqlplus` in this CLI environment.** Run SQL via VSCode Oracle extension, SQL Developer, or directly from Hop. The 4 SQL files in `databases/` must be executed in this order:
@@ -27,7 +35,7 @@ Fact table: `fact_gtd_event`. 13 dimensions: `dim_ataque`, `dim_detalle`, `dim_t
 
 - **JDBC driver is already installed** at `~/Applications/hop/lib/jdbc/ojdbc11.jar`. Do not re-download unless the driver version changes.
 
-- **Hop metadata connection name is `inuta-gtd`** (Oracle, user `in2026_dici3`). When creating new pipelines/workflows, reuse this connection from the metadata tree — don't recreate it per pipeline.
+- **Hop connection name is `GTD_DB`** (Oracle, user `in2026_dici3`). Verified working parameters: host `146.83.109.225`, port `1521`, SID `inuta`, URL `jdbc:oracle:thin:@146.83.109.225:1521:inuta`. Reuse this connection from the metadata tree in all pipelines/workflows — don't recreate it per pipeline.
 
 - **Files in `informe/` and `presentacion/` are the source of truth for pipeline design.** The `proceso_etl.md` has exact SQL, hop config, and dimension field mappings. Treat it as the blueprint, not as optional reading. **Note:** the `DIM_ESPEC_LUGAR` SQL in `proceso_etl.md` omits `VICINITY_TXT`; the final pipeline must derive it from `VICINITY` to match `create_tables.sql` and the `spec_lugar.csv` example.
 
