@@ -91,23 +91,29 @@ Combination Lookup/Update → DIM_ESPEC_LUGAR
 ```
 
 ### SQL Table Input
+
+> El SQL en `informe/proceso_etl.md` no incluye `VICINITY_TXT`, pero el DDL y el ejemplo `spec_lugar.csv` sí lo requieren. Se agrega la derivación de `VICINITY_TXT` y los textos largos de `SPECIFY_TXT` tal como aparecen en el CSV de ejemplo.
+
 ```sql
 SELECT DISTINCT
-    VICINITY,
-    CASE VICINITY
-        WHEN 1 THEN 'Si'
-        ELSE 'No'
+    COALESCE(VICINITY, -9) AS VICINITY,
+    CASE COALESCE(VICINITY, -9)
+        WHEN 0 THEN 'NO'
+        WHEN 1 THEN 'YES'
+        ELSE 'Unknown'
     END AS VICINITY_TXT,
-    COALESCE(SPECIFICITY, -9) AS SPECIFY,
-    CASE SPECIFICITY
-        WHEN 1 THEN 'Exacto'
-        WHEN 2 THEN 'Ciudad'
-        WHEN 3 THEN 'Provincia/Estado'
-        WHEN 4 THEN 'País'
-        WHEN 5 THEN 'Región'
-        ELSE 'Desconocido'
+    COALESCE(SPECIFICITY, -1) AS SPECIFY,
+    CASE
+        WHEN SPECIFICITY IS NULL OR SPECIFICITY = -1 THEN 'Not applicable'
+        WHEN SPECIFICITY = 1 THEN 'event occurred in city/village/town and lat/long is for that location'
+        WHEN SPECIFICITY = 2 THEN 'event occurred in city/village/town and no lat/long could be found, so coordinates are for centroid of smallest subnational administrative region identified'
+        WHEN SPECIFICITY = 3 THEN 'event did not occur in city/village/town, so coordinates are for centroid of smallest subnational administrative region identified'
+        WHEN SPECIFICITY = 4 THEN 'no 2nd order or smaller region could be identified, so coordinates are for center of 1st order administrative region'
+        WHEN SPECIFICITY = 5 THEN 'no 1st order administrative region could be identified for the location of the attack, so latitude and longitude are unknown'
+        ELSE 'unknown'
     END AS SPECIFY_TXT
 FROM GTD
+ORDER BY VICINITY, SPECIFY
 ```
 
 ### Configuración Combination Lookup/Update
@@ -144,12 +150,12 @@ Combination Lookup/Update → DIM_DETALLES_A
 ### SQL Table Input
 ```sql
 SELECT DISTINCT
-    INT_LOG,
-    CASE INT_LOG WHEN 1 THEN 'Si' WHEN 0 THEN 'No' WHEN -9 THEN 'Desconocido' ELSE 'Desconocido' END AS INT_LOG_TEXT,
-    INT_MISC,
-    CASE INT_MISC WHEN 1 THEN 'Si' WHEN 0 THEN 'No' WHEN -9 THEN 'Desconocido' ELSE 'Desconocido' END AS INT_MISC_TEXT,
-    INT_ANY,
-    CASE INT_ANY WHEN 1 THEN 'Si' WHEN 0 THEN 'No' WHEN -9 THEN 'Desconocido' ELSE 'Desconocido' END AS INT_ANY_TEXT
+    COALESCE(INT_LOG, -9) AS INT_LOG,
+    CASE COALESCE(INT_LOG, -9) WHEN 1 THEN 'Si' WHEN 0 THEN 'No' WHEN -9 THEN 'Desconocido' ELSE 'Desconocido' END AS INT_LOG_TEXT,
+    COALESCE(INT_MISC, -9) AS INT_MISC,
+    CASE COALESCE(INT_MISC, -9) WHEN 1 THEN 'Si' WHEN 0 THEN 'No' WHEN -9 THEN 'Desconocido' ELSE 'Desconocido' END AS INT_MISC_TEXT,
+    COALESCE(INT_ANY, -9) AS INT_ANY,
+    CASE COALESCE(INT_ANY, -9) WHEN 1 THEN 'Si' WHEN 0 THEN 'No' WHEN -9 THEN 'Desconocido' ELSE 'Desconocido' END AS INT_ANY_TEXT
 FROM GTD
 ```
 
@@ -189,7 +195,10 @@ Combination Lookup/Update → DIM_ARMA
 ### SQL Table Input (UNPIVOT con UNION ALL)
 ```sql
 SELECT DISTINCT
-    WEAPTYPE, WEAPTYPE_TXT, WEAPSUBTYPE, WEAPSUBTYPE_TXT
+    COALESCE(WEAPTYPE, -1) AS WEAPTYPE,
+    COALESCE(WEAPTYPE_TXT, 'Not applicable') AS WEAPTYPE_TXT,
+    COALESCE(WEAPSUBTYPE, -1) AS WEAPSUBTYPE,
+    COALESCE(WEAPSUBTYPE_TXT, 'Not applicable') AS WEAPSUBTYPE_TXT
 FROM (
     SELECT WEAPTYPE1 AS WEAPTYPE, WEAPTYPE1_TXT AS WEAPTYPE_TXT, WEAPSUBTYPE1 AS WEAPSUBTYPE, WEAPSUBTYPE1_TXT AS WEAPSUBTYPE_TXT FROM GTD
     UNION ALL
@@ -204,8 +213,8 @@ FROM (
 ### If Null
 - `WEAPTYPE` → `-1`
 - `WEAPSUBTYPE` → `-1`
-- `WEAPTYPE_TXT` → `'Not applicable'`
-- `WEAPSUBTYPE_TXT` → `'Not applicable'`
+- `WEAPTYPE_TXT` → `Not applicable`
+- `WEAPSUBTYPE_TXT` → `Not applicable`
 
 ### Sort rows + Unique rows
 Ordenar y eliminar duplicados por: `WEAPTYPE`, `WEAPTYPE_TXT`, `WEAPSUBTYPE`, `WEAPSUBTYPE_TXT`.
@@ -246,12 +255,14 @@ Combination Lookup/Update → DIM_ATAQUE
 ### SQL Table Input
 ```sql
 SELECT DISTINCT
-    ATTACKTYPE1, ATTACKTYPE1_TXT,
+    COALESCE(ATTACKTYPE1, -9) AS ATTACKTYPE1,
+    COALESCE(ATTACKTYPE1_TXT, 'Desconocido') AS ATTACKTYPE1_TXT,
     COALESCE(ATTACKTYPE2, -1) AS ATTACKTYPE2,
     COALESCE(ATTACKTYPE2_TXT, 'Not applicable') AS ATTACKTYPE2_TXT,
     COALESCE(ATTACKTYPE3, -1) AS ATTACKTYPE3,
     COALESCE(ATTACKTYPE3_TXT, 'Not applicable') AS ATTACKTYPE3_TXT,
-    SUCCESS, SUICIDE
+    COALESCE(SUCCESS, -9) AS SUCCESS,
+    COALESCE(SUICIDE, -9) AS SUICIDE
 FROM GTD
 ```
 
@@ -288,23 +299,23 @@ Unique rows
 Combination Lookup/Update → DIM_PERPETRADORES
 ```
 
-### SQL Table Input (UNPIVOT)
+### SQL Table Input (UNPIVOT con UNION ALL)
 ```sql
-SELECT DISTINCT GNAME, GSUBNAME
-FROM GTD
-UNPIVOT (
-    (GNAME, GSUBNAME) FOR name_type IN (
-        (GNAME, GSUBNAME) AS 'group1',
-        (GNAME2, GSUBNAME2) AS 'group2',
-        (GNAME3, GSUBNAME3) AS 'group3'
-    )
+SELECT DISTINCT
+    GNAME,
+    COALESCE(GSUBNAME, 'Not specified') AS GSUBNAME
+FROM (
+    SELECT GNAME, GSUBNAME FROM GTD WHERE GNAME IS NOT NULL
+    UNION ALL
+    SELECT GNAME2, GSUBNAME2 FROM GTD WHERE GNAME2 IS NOT NULL
+    UNION ALL
+    SELECT GNAME3, GSUBNAME3 FROM GTD WHERE GNAME3 IS NOT NULL
 )
 ```
 
-> Nota: Oracle UNPIVOT elimina filas con valores nulos automáticamente, pero puedes agregar un `Filter rows` por seguridad.
-
 ### If Null
-- `GSUBNAME` → `'Not specified'`
+- `GNAME` → `Unknown`
+- `GSUBNAME` → `Not specified`
 
 ### Configuración Combination Lookup/Update
 - **Target table:** `DIM_PERPETRADORES`
@@ -382,8 +393,14 @@ Combination Lookup/Update → DIM_OBJETIVOS
 ### SQL Table Input (UNPIVOT con UNION ALL)
 ```sql
 SELECT DISTINCT
-    TARGTYPE, TARGTYPE_TXT, TARGSUBTYPE, TARGSUBTYPE_TXT,
-    CORP, TARGET, NATLTY, NATLTY_TXT
+    COALESCE(TARGTYPE, -1) AS TARGTYPE,
+    COALESCE(TARGTYPE_TXT, 'Not applicable') AS TARGTYPE_TXT,
+    COALESCE(TARGSUBTYPE, -1) AS TARGSUBTYPE,
+    COALESCE(TARGSUBTYPE_TXT, 'Not applicable') AS TARGSUBTYPE_TXT,
+    COALESCE(CORP, 'Not applicable') AS CORP,
+    COALESCE(TARGET, 'Not applicable') AS TARGET,
+    COALESCE(NATLTY, -1) AS NATLTY,
+    COALESCE(NATLTY_TXT, 'Not applicable') AS NATLTY_TXT
 FROM (
     SELECT TARGTYPE1 AS TARGTYPE, TARGTYPE1_TXT AS TARGTYPE_TXT, TARGSUBTYPE1 AS TARGSUBTYPE, TARGSUBTYPE1_TXT AS TARGSUBTYPE_TXT, CORP1 AS CORP, TARGET1 AS TARGET, NATLTY1 AS NATLTY, NATLTY1_TXT AS NATLTY_TXT FROM GTD
     UNION ALL
